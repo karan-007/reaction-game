@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reaction Test</title>
+    <script src="jquery.min.js"></script>
+    <style type="text/css">
+        #shape{
+            height: 10px;
+            width: 10px;
+            position: relative;
+        }
+        #head{
+            width: 1600px;
+            
+            background-color: yellow;
+            margin: 0 auto;
+        }
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #font{
+            position: relative;
+            left: 500px;
+            font-size: 50px;
+            font-family: cursive;
+        }
+        #t{
+            margin: 0 auto;  
+        }
+    </style>
+    
+</head>
+<body>  
+        
+          
+    <div id="head"> <span id="font">Test Your Reaction</span></div>
+    <p id="t"><b>your time:</b><span id="t1"></span></p>
+    <div id="shape"></div>
+<script type="text/javascript">
+        var start=new Date().getTime();
+        function randomcolor(){
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i=0; i<6; i++){
+                color += letters[Math.floor(Math.random()*16)];
+            }
+            return color;
+        }
+        function appear(){
+            var top=Math.random()*400;
+            var left=Math.random()*1100;
+            var width=Math.random()*100 +20;
+            if(Math.random()<0.5){
+                    document.getElementById("shape").style.borderRadius="50%"
+                }
+                else{
+                    document.getElementById("shape").style.borderRadius="0%"
+                }
+            
+            document.getElementById("shape").style.backgroundColor=randomcolor();
+            $("#shape").animate({height:width+"px",width:width+"px"},1000);
+            document.getElementById("shape").style.left=left+"px";
+            document.getElementById("shape").style.top=top +"px";
+            document.getElementById("shape").style.display="block";
+            start=new Date().getTime();
+        }
+        function appearagain(){
+            setTimeout(appear,Math.random()*1000);
+        }
+        appear();
+        document.getElementById("shape").onclick=function(){
+            document.getElementById("shape").style.display="none";
+            var end=new Date().getTime();
+            var timetaken=(end-start)/1000;
+            document.getElementById("t1").innerHTML=timetaken + "s";
+            appearagain();
+        }
+        
+</script>                   
+</body>
+</html>
